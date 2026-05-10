@@ -12,7 +12,9 @@
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
+    "./common/*": "./src/common/*",
     "./main/*": "./src/main/*",
+    "./preload/*": "./src/preload/*",
     "./renderer/*": "./src/renderer/*",
     "./assets/*": "./src/assets/*"
   },

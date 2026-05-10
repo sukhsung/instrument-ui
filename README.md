@@ -23,3 +23,5 @@ For standalone app repositories or CI, switch the dependency to the private GitH
 The consuming app must provide `serialport` because the shared connection adapters use it as a peer dependency.
 
 Shared renderer assets are available under `src/assets`, and shared renderer templates are loaded package-relative by the exported UI managers.
+
+Common IPC channel groups and preload bridge helpers are exported from `instrument-ui/common/ipcChannels.js` and `instrument-ui/preload/common.js`. Consuming apps can compose their app-specific channel groups with `createIpcChannels()` and then register the shared preload APIs with `registerCommonPreloadApis()`.
