@@ -1,4 +1,8 @@
 import { import_template } from "./util/import_template.js";
+import {
+  applyInstrumentAssetUrls,
+  instrumentTemplateUrl,
+} from "./util/package_urls.js";
 import { UI_Manager } from "./UI_Manager.js";
 
 export { UI_KeyboardManager };
@@ -18,14 +22,20 @@ class UI_KeyboardManager extends UI_Manager {
 
   }
 
-  async create_keyboards(){
-    const template_numpad = await import_template("./templates/template_keyboard_numeric.html");
-    document.body.appendChild(template_numpad.content.cloneNode(true));
-    
+  async create_keyboards() {
+    const template_numpad = await import_template(
+      instrumentTemplateUrl("template_keyboard_numeric.html"),
+    );
+    const numpad = template_numpad.content.cloneNode(true);
+    applyInstrumentAssetUrls(numpad);
+    document.body.appendChild(numpad);
 
-    const template_qwerty = await import_template("./templates/template_keyboard_qwerty.html");
-    document.body.appendChild(template_qwerty.content.cloneNode(true));
-
+    const template_qwerty = await import_template(
+      instrumentTemplateUrl("template_keyboard_qwerty.html"),
+    );
+    const qwerty = template_qwerty.content.cloneNode(true);
+    applyInstrumentAssetUrls(qwerty);
+    document.body.appendChild(qwerty);
   }
 
   async initialize() {

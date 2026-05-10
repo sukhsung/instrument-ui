@@ -8,3 +8,8 @@ export { UI_InfoManager } from "./renderer/js/splash/UI_InfoManager.js";
 export { UI_SplashManager } from "./renderer/js/splash/UI_SplashManager.js";
 export { UI_ConnectionManager } from "./renderer/js/splash/UI_Connection.js";
 export { import_template } from "./renderer/js/util/import_template.js";
+export {
+  applyInstrumentAssetUrls,
+  instrumentAssetUrl,
+  instrumentTemplateUrl,
+} from "./renderer/js/util/package_urls.js";

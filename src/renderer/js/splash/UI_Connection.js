@@ -1,4 +1,5 @@
 import { UI_Manager } from "../UI_Manager.js";
+import { instrumentTemplateUrl } from "../util/package_urls.js";
 
 export { UI_ConnectionManager };
 
@@ -34,7 +35,6 @@ class UI_ConnectionManager extends UI_Manager {
       temp: window.api_temperature,
       flow: window.api_flow,
       stage: window.api_stage,
-      vivi: window.api_vivi,
     };
     this.api_device = api_device ?? api_map[device_type];
     this.order = order;
@@ -187,7 +187,7 @@ class UI_ConnectionManager extends UI_Manager {
 
   async _create_connection_setting() {
     const template = await this.import_template(
-      "./templates/template_connection.html",
+      instrumentTemplateUrl("template_connection.html"),
     );
     const clone = template.content.cloneNode(true);
 
