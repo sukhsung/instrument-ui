@@ -1,0 +1,26 @@
+{
+  "name": "instrument-ui",
+  "version": "0.1.0",
+  "author": {
+    "name": "Suk Hyun Sung",
+    "email": "sukhsung@umich.edu"
+  },
+  "description": "Shared UI and Electron infrastructure for SERIAL/TCP devices.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./main/*": "./src/main/*",
+    "./renderer/*": "./src/renderer/*",
+    "./assets/*": "./src/assets/*"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "serialport": "^13.0.0"
+  }
+}
