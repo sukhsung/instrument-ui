@@ -1,5 +1,17 @@
 export { load_config } from "./main/ConfigManager.js";
-export { guardEPIPE, registerOSSwitches, resolvePaths, registerAppHandlers, registerWindowHandlers, send_to_renderer } from "./main/app.js";
+export {
+  guardEPIPE,
+  registerOSSwitches,
+  registerApplicationMenu,
+  resolvePaths,
+  registerAppHandlers,
+  registerAppLifecycleHandlers,
+  registerWindowHandlers,
+  send_to_renderer,
+  createAbout,
+  createMainWindow,
+  registerMainWindowEvents,
+} from "./main/app.js";
 export { LogManager } from "./main/LogManager.js";
 export { ConnectionManager } from "./main/connection/ConnectionManager.js";
 export { DeviceManager } from "./main/DeviceManager.js";
