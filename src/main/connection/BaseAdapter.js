@@ -15,6 +15,7 @@ export class BaseAdapter extends EventEmitter {
 
     this._buffer = Buffer.alloc(0);
     this._readResolvers = [];
+    this._closing = null;
   }
 
   set_timeout(timeout) {
@@ -45,11 +46,24 @@ export class BaseAdapter extends EventEmitter {
     await this.sleep(100);
   }
 
-  close() {
-    if (this.is_open()) {
-      this._close_dev();
+  async close() {
+    if (this._closing) return await this._closing;
+    if (!this.is_open()) {
       this.device = null;
+      return;
     }
+
+    this._closing = new Promise((resolve) => {
+      const timer = setTimeout(resolve, 1000);
+      timer.unref?.();
+      this.once("closed", () => {
+        clearTimeout(timer);
+        resolve();
+      });
+    });
+    this._close_dev();
+    await this._closing;
+    this._closing = null;
   }
 
   flush() {

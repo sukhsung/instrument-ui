@@ -57,6 +57,18 @@ export class DeviceManager extends EventEmitter {
     return true;
   }
 
+  async fail_connect() {
+    this.connected = false;
+    if (this.device?.is_open()) {
+      await this.device.close();
+    }
+    this.connection_manager.adapter = null;
+    this.protocol = null;
+    this.device = null;
+    this.t_interval = null;
+    this.emit_connection();
+  }
+
   // Connection Logic
   async connect(protocol) {
     this.connected = false;
@@ -75,9 +87,7 @@ export class DeviceManager extends EventEmitter {
     this.delimiter = protocol.delimiter;
 
     if (!(await this._connect(protocol))) {
-      this.protocol = null;
-      this.device = null;
-      this.emit_connection();
+      await this.fail_connect();
       return;
     }
 
@@ -90,17 +100,26 @@ export class DeviceManager extends EventEmitter {
       this.t_interval = protocol.t_interval;
       await this.init_device();
       this.emit_connection();
+    } else {
+      this.print("Connected device failed validation");
+      await this.fail_connect();
     }
   }
 
   // Disconnect Logic
   async disconnect() {
     this.print("Disconnecting");
-    if (this.connected) {
+    if (this.connected && this.device) {
       await this.prepare_disconnect();
-      await this.device.close();
+      const device = this.device;
       this.connected = false;
       this.device = null;
+      this.protocol = null;
+      await device.close();
+    } else {
+      this.connected = false;
+      this.device = null;
+      this.protocol = null;
     }
     this.emit_connection();
   }
@@ -207,19 +226,21 @@ export class DeviceManager extends EventEmitter {
   }
 
   async register_event_handlers() {
-    this.device.on("open", async (msg) => {
+    const device = this.device;
+
+    device.on("open", async (msg) => {
       if (msg.open === false) {
         await this.on_port_close();
       }
     });
 
-    this.device.on("closed", () => {
+    device.on("closed", () => {
       this.running = false;
-      this.emit(this.api_device.EVT_CONNECTION, {
-        device_info: null,
-        connected: false,
-        protocol: null,
-      });
+      if (this.device !== device && !this.connected) return;
+      this.connected = false;
+      this.device = null;
+      this.protocol = null;
+      this.emit_connection();
     });
   }
 
