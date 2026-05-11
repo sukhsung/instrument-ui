@@ -1,4 +1,5 @@
 export { ConnectionManager } from "./main/connection/ConnectionManager.js";
+export { DeviceManager } from "./main/DeviceManager.js";
 export {
   COMMON_IPC_CHANNELS,
   createIpcChannels,

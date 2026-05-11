@@ -1,5 +1,5 @@
-export function createDevicePreloadApi(ipcRenderer, channels, options = {}) {
-  const api = {
+export function createDevicePreloadApi(ipcRenderer, channels) {
+  return {
     is_connected: () => ipcRenderer.invoke(channels.IS_CONNECTED),
     connect: (data) => ipcRenderer.send(channels.CONNECT, data),
     disconnect: () => ipcRenderer.send(channels.DISCONNECT),
@@ -14,13 +14,6 @@ export function createDevicePreloadApi(ipcRenderer, channels, options = {}) {
     evt_settings: (callback) =>
       ipcRenderer.on(channels.EVT_SETTINGS, (_evt, data) => callback(data)),
   };
-
-  if (options.includeMoving) {
-    api.evt_moving = (callback) =>
-      ipcRenderer.on(channels.EVT_MOVING, (_evt, data) => callback(data));
-  }
-
-  return api;
 }
 
 export function registerCommonPreloadApis({ contextBridge, ipcRenderer, CH }) {
