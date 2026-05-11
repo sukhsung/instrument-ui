@@ -18,7 +18,26 @@ export function registerOSSwitches() {
 export function resolvePaths(importMetaUrl) {
   const __filename = importMetaUrl;
   const __dirname = path.dirname(fileURLToPath(importMetaUrl));
-  return { __filename, __dirname };
+  const path_src = path.join(__dirname, "..");
+  const path_assets = path.join(path_src, "assets");
+  const path_renderer = path.join(path_src, "renderer");
+  const path_terminal = path.join(path_src, "terminal");
+
+  return {
+    __filename,
+    __dirname,
+    path_src,
+    path_preload: path.join(path_src, "preload", "preload.js"),
+    path_renderer,
+    path_renderer_index: path.join(path_renderer, "index.html"),
+    path_terminal,
+    path_terminal_index: path.join(path_terminal, "terminal.html"),
+    path_assets,
+    path_icon: path.join(path_assets, "app-icon.png"),
+    path_default_config: path.join(path_assets, "default.config"),
+    url_app_ipc_channels: new URL("../common/appIpcChannels.js", importMetaUrl)
+      .href,
+  };
 }
 
 export function registerAppHandlers({ version, config, info }) {
