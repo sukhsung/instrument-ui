@@ -28,6 +28,12 @@ export function registerAppHandlers({ version, config, info }) {
   ipcMain.handle(CH.APP.GET_INFO,    () => info);
 }
 
+export function send_to_renderer(win, channel, data) {
+  if (win && !win.isDestroyed()) {
+    win.webContents.send(channel, data);
+  }
+}
+
 export function registerWindowHandlers() {
   const CH = COMMON_IPC_CHANNELS;
   ipcMain.on(CH.WINDOW.MINIMIZE, (event) => {

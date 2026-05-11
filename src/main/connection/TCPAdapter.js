@@ -17,16 +17,11 @@ export class TCPAdapter extends BaseAdapter {
   }
 
   flush() {
-    this.log("Flush called (no-op for TCP)");
+    this.print("Flush called (no-op for TCP)");
   }
 
   _close_dev() {
     this.device.destroy();
   }
 
-  log(msg) {
-    if (this.verbose >= 3) {
-      console.log(`[TCPAdapter]: ${msg}`);
-    }
-  }
 }

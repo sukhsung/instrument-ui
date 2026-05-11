@@ -1,5 +1,5 @@
 export { load_config } from "./main/ConfigManager.js";
-export { guardEPIPE, registerOSSwitches, resolvePaths, registerAppHandlers, registerWindowHandlers } from "./main/app.js";
+export { guardEPIPE, registerOSSwitches, resolvePaths, registerAppHandlers, registerWindowHandlers, send_to_renderer } from "./main/app.js";
 export { LogManager } from "./main/LogManager.js";
 export { ConnectionManager } from "./main/connection/ConnectionManager.js";
 export { DeviceManager } from "./main/DeviceManager.js";
@@ -9,6 +9,7 @@ export {
 } from "./common/ipcChannels.js";
 export { getSerialPort } from "./main/util/load_serialport.js";
 export { list_serial_ports } from "./main/util/list_serial_ports.js";
+export { make_printer } from "./main/util/printer.js";
 export { get_timestamp } from "./main/util/time.js";
 export {
   createPreload,

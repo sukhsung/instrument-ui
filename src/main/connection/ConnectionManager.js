@@ -1,11 +1,13 @@
 import { SerialAdapter } from "./SerialAdapter.js";
 import { TCPAdapter } from "./TCPAdapter.js";
 import { EventEmitter } from "node:events";
+import { make_printer } from "../util/printer.js";
 
 export class ConnectionManager extends EventEmitter {
   constructor(verbose = 0) {
     super();
     this.verbose = verbose;
+    this.print = make_printer(verbose, this.constructor.name);
     this.adapter = null;
     this.protocol = null;
     this.default_timeout = 100;
@@ -21,7 +23,7 @@ export class ConnectionManager extends EventEmitter {
       this.adapter = await this._make_adapter(protocol);
       await this.adapter.open();
     } catch (error) {
-      this.log(error.message);
+      this.print(error.message);
       this.adapter = null;
     }
   }
@@ -33,10 +35,10 @@ export class ConnectionManager extends EventEmitter {
 
     try {
       while (attempts > 0) {
-        this.log(`Try connecting, up to ${attempts} more times`);
+        this.print(`Try connecting, up to ${attempts} more times`);
         await this._open_once(protocol);
         if (this.is_open()) {
-          this.log("Opened");
+          this.print("Opened");
           this.adapter.set_timeout(this.default_timeout)
           break;
         } else {
@@ -47,7 +49,7 @@ export class ConnectionManager extends EventEmitter {
       }
 
       if (attempts === 0) {
-        this.log("Exhausted open attempts");
+        this.print("Exhausted open attempts");
       }
     } finally {
       this._opening = false;
@@ -73,13 +75,7 @@ export class ConnectionManager extends EventEmitter {
   }
 
   async sleep(ms) {
-    this.log(`Sleeping for ${ms} ms`);
+    this.print(`Sleeping for ${ms} ms`, 2);
     return await new Promise((res) => setTimeout(res, ms));
-  }
-
-  log(msg) {
-    if (this.verbose >= 2) {
-      console.log(`[ConnectionManager]: ${msg}`);
-    }
   }
 }

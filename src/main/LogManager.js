@@ -9,12 +9,17 @@ export class LogManager extends EventEmitter {
   constructor(verbose, relativeLogDir) {
     super();
     this.verbose = verbose;
+    this.win = null;
     this.home = os.homedir();
     this.path = path.join(this.home, relativeLogDir, this.get_date());
     this.mkdir(this.path);
     this.fname = null;
     this.api_log = COMMON_IPC_CHANNELS.LOG;
     this.tag = "";
+  }
+
+  set_win(win) {
+    this.win = win;
   }
 
   set_tag(tag) {
@@ -38,7 +43,7 @@ export class LogManager extends EventEmitter {
   }
 
   async select_dir() {
-    const result = await dialog.showOpenDialog({
+    const result = await dialog.showOpenDialog(this.win, {
       properties: ["openDirectory"],
     });
     if (result.canceled) return null;

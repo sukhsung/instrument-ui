@@ -1,10 +1,12 @@
 import { EventEmitter } from "node:events";
+import { make_printer } from "../util/printer.js";
 
 export class BaseAdapter extends EventEmitter {
   constructor(protocol, verbose = 0) {
     super();
 
     this.verbose = verbose;
+    this.print = make_printer(verbose, this.constructor.name);
     this.protocol = protocol;
     this.encoding = protocol.encoding;
     this.delimiter = protocol.delimiter;
@@ -25,18 +27,18 @@ export class BaseAdapter extends EventEmitter {
 
   async open() {
     if (this.is_open()) {
-      this.log("Connection already open");
+      this.print("Connection already open");
       return;
     }
 
-    this.log("Opening");
+    this.print("Opening");
 
     await this._open();
     this.device.on("open", () => this._on_open());
     this.device.on("data", (chunk) => this._on_data(chunk));
     this.device.on("close", () => this._on_close());
     this.device.on("error", (err) => {
-      this.log(err.message);
+      this.print(err.message);
     });
 
     this.device.open();
@@ -82,9 +84,7 @@ export class BaseAdapter extends EventEmitter {
         );
         const partial = this._buffer;
         this._buffer = Buffer.alloc(0);
-        if (this.verbose >= 1) console.warn(
-          `read timeout: returning partial data ${partial.length}/${size} bytes`,
-        );
+        this.print(`read timeout: returning partial data ${partial.length}/${size} bytes`);
         resolve(partial);
       }, this.timeout);
 
@@ -146,7 +146,7 @@ export class BaseAdapter extends EventEmitter {
   }
 
   _on_open() {
-    this.log("Open");
+    this.print("Open");
     this.flush();
   }
 
@@ -166,7 +166,7 @@ export class BaseAdapter extends EventEmitter {
   }
 
   _on_close() {
-    this.log("Connection closed");
+    this.print("Connection closed");
     for (const { resolve } of this._readResolvers) {
       resolve(Buffer.alloc(0));
     }
@@ -177,13 +177,7 @@ export class BaseAdapter extends EventEmitter {
   }
 
   async sleep(ms) {
-    this.log(`Sleeping for ${ms} ms`);
+    this.print(`Sleeping for ${ms} ms`, 2);
     return await new Promise((res) => setTimeout(res, ms));
-  }
-
-  log(msg) {
-    if (this.verbose >= 3) {
-      console.log(`[BaseAdapter]: ${msg}`);
-    }
   }
 }

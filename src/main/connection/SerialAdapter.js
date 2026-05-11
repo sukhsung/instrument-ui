@@ -19,10 +19,10 @@ export class SerialAdapter extends BaseAdapter {
 
   flush() {
     if (this.is_open()) {
-      this.log("Flushing");
+      this.print("Flushing");
       this.device.flush();
     } else {
-      this.log("Device not open, can't flush");
+      this.print("Device not open, can't flush");
     }
   }
 
@@ -30,9 +30,4 @@ export class SerialAdapter extends BaseAdapter {
     this.device.close();
   }
 
-  log(msg) {
-    if (this.verbose >= 3) {
-      console.log(`[SerialAdapter]: ${msg}`);
-    }
-  }
 }

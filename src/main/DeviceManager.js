@@ -1,10 +1,12 @@
 import { EventEmitter } from "node:events";
 import { ConnectionManager } from "./connection/ConnectionManager.js";
+import { make_printer } from "./util/printer.js";
 
 export class DeviceManager extends EventEmitter {
   constructor(device_info, verbose = 0) {
     super();
     this.verbose = verbose;
+    this.print = make_printer(verbose, this.constructor.name);
     this.device_info = device_info;
 
     this.connection_manager = new ConnectionManager(verbose);
@@ -82,7 +84,7 @@ export class DeviceManager extends EventEmitter {
     // If Open wait 500 ms then validate device
     // await this.sleep(500);
     if (await this.check_device()) {
-      this.log("Connected to valid device");
+      this.print("Connected to valid device");
       this.connected = true;
       this.protocol = protocol;
       this.t_interval = protocol.t_interval;
@@ -93,7 +95,7 @@ export class DeviceManager extends EventEmitter {
 
   // Disconnect Logic
   async disconnect() {
-    this.log("Disconnecting", undefined, "r");
+    this.print("Disconnecting");
     if (this.connected) {
       await this.prepare_disconnect();
       await this.device.close();
@@ -106,7 +108,7 @@ export class DeviceManager extends EventEmitter {
   // Communication Logic
 
   async start_comm() {
-    this.log("Starting Comm");
+    this.print("Starting Comm");
     if (this.running) return; // guard reentrancy
     this.running = true;
     this.requests = [];
@@ -156,14 +158,14 @@ export class DeviceManager extends EventEmitter {
   }
 
   async process_request() {
-    this.log("Processing Request");
+    this.print("Processing Request");
     const request = this.requests.shift();
-    this.log(request);
+    this.print(request);
     await this._process_request(request);
   }
 
   async _process_request(req) {
-    this.log("Processing Request");
+    this.print("Processing Request");
     return;
   }
 
@@ -172,12 +174,12 @@ export class DeviceManager extends EventEmitter {
   }
 
   async _process_regular() {
-    this.log("Processing Regular");
+    this.print("Processing Regular");
     return;
   }
 
   async init_device() {
-    this.log("Initializing device...");
+    this.print("Initializing device...");
     this.register_event_handlers();
     await this._init_device();
     return;
@@ -188,18 +190,18 @@ export class DeviceManager extends EventEmitter {
   }
 
   async prepare_disconnect() {
-    this.log("Preparing to Disconnect");
+    this.print("Preparing to Disconnect");
     await this._prepare_disconnect();
     await this.stop_comm();
   }
 
   async on_port_close() {
-    this.log("Received Port Closed", undefined, "r");
+    this.print("Received Port Closed");
     this.close();
   }
 
   async close() {
-    this.log("Closing", undefined, "r");
+    this.print("Closing");
     await this.disconnect();
     return;
   }
@@ -243,9 +245,9 @@ export class DeviceManager extends EventEmitter {
   }
 
   async check_device() {
-    this.log("Checking for valid device");
+    this.print("Checking for valid device");
     const isValid = await this._check_device();
-    this.log(`Device Validity: ${isValid}`);
+    this.print(`Device Validity: ${isValid}`);
     return isValid;
   }
 
@@ -258,13 +260,8 @@ export class DeviceManager extends EventEmitter {
   }
 
   async sleep(ms) {
-    // this.log(`Sleeping for ${ms} ms`);
+    // this.print(`Sleeping for ${ms} ms`, 2);
     return await new Promise((res) => setTimeout(res, ms));
   }
 
-  log(msg) {
-    if (this.verbose >= 2) {
-      console.log(`[DeviceManager]: ${msg}`);
-    }
-  }
 }

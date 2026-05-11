@@ -1,8 +1,10 @@
+import { app } from "electron";
 import path from "node:path";
 import os from "node:os";
 import fs from "node:fs";
 
-export function load_config(appName, defaultConfigPath) {
+export function load_config(defaultConfigPath) {
+  const appName = app.getName();
   const CONFIG_DIR = path.join(os.homedir(), appName);
   const CONFIG_PATH = path.join(CONFIG_DIR, `${appName}.config`);
 
