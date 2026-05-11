@@ -1,3 +1,11 @@
+import { createIpcChannels } from "../common/ipcChannels.js";
+
+export function createPreload({ contextBridge, ipcRenderer, appIpcChannels, setup }) {
+  const CH = createIpcChannels(appIpcChannels);
+  registerCommonPreloadApis({ contextBridge, ipcRenderer, CH });
+  if (setup) setup({ contextBridge, ipcRenderer, CH, createDevicePreloadApi });
+}
+
 export function createDevicePreloadApi(ipcRenderer, channels) {
   return {
     is_connected: () => ipcRenderer.invoke(channels.IS_CONNECTED),

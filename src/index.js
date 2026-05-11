@@ -10,6 +10,7 @@ export { getSerialPort } from "./main/util/load_serialport.js";
 export { list_serial_ports } from "./main/util/list_serial_ports.js";
 export { get_timestamp } from "./main/util/time.js";
 export {
+  createPreload,
   createDevicePreloadApi,
   registerCommonPreloadApis,
 } from "./preload/common.js";
