@@ -1,0 +1,154 @@
+@layer components {
+  /* Title bar */
+  .title-bar {
+    -webkit-app-region: drag;
+    @apply relative flex flex-none items-center;
+  }
+
+  .title-text {
+    @apply absolute left-1/2 -translate-x-1/2 text-sm font-medium text-white/60 select-none;
+  }
+
+  .win-btn {
+    -webkit-app-region: no-drag;
+    @apply bg-brand-900 mx-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-0 p-0 text-xs text-white/50 shadow-none transition-colors;
+  }
+
+  .win-btn:hover {
+    @apply bg-brand-700 text-white;
+  }
+
+  .win-btn-close:hover {
+    @apply bg-red-700 text-white;
+  }
+
+  /* Splash */
+  .splash {
+    @apply fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .splash.splash-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .splash-close {
+    @apply bg-brand-500 absolute top-5 right-5 mx-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/40 p-0 text-xs text-white/50 shadow-none transition-colors;
+  }
+
+  .splash-close:hover {
+    @apply text-white;
+  }
+
+  .splash-box {
+    @apply bg-brand-500 relative rounded-4xl px-15 py-15;
+  }
+
+  /* Panel surfaces */
+  .shadow-box {
+    @apply rounded-xl shadow-lg outline outline-black/5;
+  }
+
+  .shadow-box-sm {
+    @apply rounded-md shadow-lg outline outline-black/5;
+  }
+
+  .round-box {
+    @apply rounded-xl outline outline-black/5;
+  }
+
+  .panel {
+    @apply h-full rounded-xl p-3 text-center shadow-lg outline outline-black/5;
+  }
+
+  .panel-title {
+    @apply w-full py-2 text-lg;
+  }
+
+  .panel-content {
+    @apply flex h-full w-full gap-3;
+  }
+
+  .panel-invisible {
+    @apply pointer-events-none opacity-0;
+  }
+
+  .busy-overlay {
+    @apply bg-brand-500/50 pointer-events-none absolute inset-0 z-50 flex flex-col items-center justify-center rounded-xl backdrop-blur-xs transition-opacity duration-300;
+  }
+
+  .busy-overlay-text {
+    @apply text-center text-xl text-white select-none;
+  }
+
+  /* Display helpers */
+  .value-display-main {
+    @apply text-2xl font-medium tabular-nums;
+  }
+
+  .value-display-sub {
+    @apply tabular-nums;
+  }
+
+  /* Forms and controls */
+  .field-select {
+    @apply h-8 w-full py-0;
+  }
+
+  .field-input {
+    @apply w-full;
+  }
+
+  .button-stop {
+    @apply bg-pink-700 text-white;
+    @apply hover:bg-pink-500 hover:text-white hover:shadow-lg;
+    @apply focus:bg-pink-700 focus:text-white focus:shadow-none;
+    @apply disabled:opacity-50 disabled:shadow-none;
+  }
+
+  .tab {
+    @apply relative rounded-lg border border-transparent px-4 py-2 text-gray-700 transition-all duration-300 select-none;
+    @apply hover:border-brand-500;
+  }
+
+  .tab_active {
+    @apply bg-brand-500 rounded-lg border-transparent text-white;
+  }
+
+  .btn-toggle {
+    @apply flex overflow-hidden rounded-md border border-slate-200 shadow-sm;
+  }
+
+  .btn-toggle button {
+    @apply flex-1 rounded-none border-0 shadow-none;
+  }
+
+  .btn-toggle button:first-child {
+    border-right: 1px solid var(--color-slate-200);
+  }
+
+  .btn-toggle button.active {
+    background-color: var(--color-brand-600);
+    color: var(--color-white);
+  }
+
+  .btn-toggle button.active:hover {
+    background-color: var(--color-brand-700);
+  }
+
+  .drag-region {
+    -webkit-app-region: drag;
+  }
+
+  .arrow-btn {
+    @apply h-full w-full p-0 text-xl leading-none;
+    font-family: "Instrument Sans";
+  }
+
+  .instrument-btn {
+    font-family: "Instrument Sans";
+  }
+}

@@ -1,0 +1,158 @@
+@layer components {
+  #PB_keyboard .keyboard-icon-off {
+    display: none;
+  }
+
+  #PB_keyboard.keyboard-off .keyboard-icon-on {
+    display: none;
+  }
+
+  #PB_keyboard.keyboard-off .keyboard-icon-off {
+    display: block;
+  }
+
+  .numpad {
+    position: fixed;
+    z-index: 9999;
+    width: 300px;
+    padding: 0.625rem;
+    @apply bg-sand-50 rounded-xl shadow-xl outline outline-black/10;
+  }
+
+  .numpad-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.375rem;
+  }
+
+  .numpad-close,
+  .qwerty-close {
+    @apply border-0 bg-transparent px-3 py-1.5 text-lg text-slate-400 shadow-none;
+  }
+
+  .numpad-close:hover,
+  .qwerty-close:hover {
+    @apply bg-slate-100 text-slate-700 shadow-none;
+  }
+
+  .numpad-close:active,
+  .qwerty-close:active {
+    @apply bg-slate-200 shadow-none;
+  }
+
+  .numpad-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .numpad-btn {
+    @apply px-0 py-4 text-xl shadow-none;
+  }
+
+  .numpad-action,
+  .qwerty-action {
+    @apply text-brand-600 font-medium;
+  }
+
+  .numpad-zero {
+    grid-column: span 2;
+  }
+
+  .numpad-enter {
+    grid-column: span 2;
+  }
+
+  .numpad-enter,
+  .qwerty-enter {
+    @apply bg-brand-500 border-brand-600 text-white;
+  }
+
+  .numpad-enter:hover,
+  .qwerty-enter:hover {
+    @apply bg-brand-400;
+  }
+
+  .numpad-enter:active,
+  .qwerty-enter:active {
+    @apply bg-brand-700;
+  }
+
+  .keyboard-buffer-inline {
+    flex: 1;
+    min-width: 0;
+    @apply rounded-lg bg-transparent px-3 py-2;
+  }
+
+  .keyboard-buffer-inline-value {
+    min-height: 1.5rem;
+    @apply truncate text-lg font-semibold text-slate-950;
+  }
+
+  .qwerty {
+    position: fixed;
+    z-index: 9999;
+    width: 500px;
+    padding: 0.625rem;
+    @apply bg-sand-50 rounded-xl shadow-xl outline outline-black/10;
+  }
+
+  .qwerty-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .qwerty-row {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .qwerty-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .qwerty-row-center {
+    justify-content: center;
+  }
+
+  .qwerty-row-bottom {
+    margin-top: 4px;
+  }
+
+  .qwerty-key,
+  .qwerty-wide,
+  .qwerty-space {
+    @apply min-w-0 px-0 py-4 text-xl shadow-none;
+  }
+
+  .qwerty-key {
+    flex: 1;
+  }
+
+  .qwerty-wide {
+    flex: 1.5;
+  }
+
+  .qwerty-space {
+    flex: 4;
+  }
+
+  .qwerty-key .qu {
+    display: none;
+  }
+
+  #qwerty.shifted .qwerty-key .ql {
+    display: none;
+  }
+
+  #qwerty.shifted .qwerty-key .qu {
+    display: inline;
+  }
+
+  #qwerty.shifted .qwerty-shift {
+    @apply bg-brand-500 border-brand-600 text-white;
+  }
+}

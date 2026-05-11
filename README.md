@@ -25,3 +25,5 @@ The consuming app must provide `serialport` because the shared connection adapte
 Shared renderer assets are available under `src/assets`, and shared renderer templates are loaded package-relative by the exported UI managers.
 
 Common IPC channel groups and preload bridge helpers are exported from `instrument-ui/common/ipcChannels.js` and `instrument-ui/preload/common.js`. Consuming apps can compose their app-specific channel groups with `createIpcChannels()` and then register the shared preload APIs with `registerCommonPreloadApis()`.
+
+Shared renderer CSS is available under `src/renderer/css`. Consuming apps should define their own `--color-brand-*` theme tokens before relying on the shared base, component, and keyboard styles.
