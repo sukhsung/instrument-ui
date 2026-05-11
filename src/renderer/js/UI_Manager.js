@@ -1,10 +1,12 @@
 import { import_template } from "./util/import_template.js";
+import { make_printer } from "../../common/printer.js";
 export { UI_Manager };
 
 class UI_Manager extends EventTarget {
   constructor(div_main_id, verbose = false) {
     super();
     this.verbose = verbose;
+    this.print = make_printer(verbose, this.constructor.name, false);
     this.div_main_id = div_main_id;
   }
 
@@ -53,12 +55,6 @@ class UI_Manager extends EventTarget {
       element.classList.add("hidden");
     } else {
       element.classList.remove("hidden");
-    }
-  }
-
-  print(message, header = this.constructor.name) {
-    if (this.verbose) {
-      console.log(`${header}: ${message}`);
     }
   }
 

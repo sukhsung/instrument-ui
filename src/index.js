@@ -9,7 +9,7 @@ export {
 } from "./common/ipcChannels.js";
 export { getSerialPort } from "./main/util/load_serialport.js";
 export { list_serial_ports } from "./main/util/list_serial_ports.js";
-export { make_printer } from "./main/util/printer.js";
+export { make_printer } from "./common/printer.js";
 export { get_timestamp } from "./main/util/time.js";
 export {
   createPreload,
