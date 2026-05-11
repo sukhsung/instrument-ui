@@ -23,6 +23,7 @@
     "README.md"
   ],
   "peerDependencies": {
+    "electron": "^41.2.0",
     "serialport": "^13.0.0"
   }
 }
