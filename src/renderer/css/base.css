@@ -4,16 +4,16 @@
   }
 
   body {
-    @apply bg-brand-950 grid h-screen grid-rows-[40px_1fr] px-4 pt-0 pb-4;
+    @apply bg-background grid h-screen grid-rows-[40px_1fr] px-4 pt-0 pb-4;
   }
 
   html:not(.touch-mode) button:hover {
-    @apply bg-brand-500 text-white shadow-lg;
+    @apply bg-app-500 text-white shadow-lg;
   }
 
   button {
-    @apply bg-sand-50 items-center justify-center rounded-md border border-slate-200 px-4 py-2 text-center text-sm shadow-sm transition-all;
-    @apply active:bg-brand-700 active:text-white active:shadow-none;
+    @apply bg-panel-50 items-center justify-center rounded-md border border-slate-200 px-4 py-2 text-center text-sm shadow-sm transition-all;
+    @apply active:bg-app-700 active:text-white active:shadow-none;
     @apply disabled:pointer-events-none disabled:opacity-50;
   }
 

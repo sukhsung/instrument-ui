@@ -11,11 +11,11 @@
 
   .win-btn {
     -webkit-app-region: no-drag;
-    @apply bg-brand-900 mx-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-0 p-0 text-xs text-white/50 shadow-none transition-colors;
+    @apply bg-app-900 mx-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-0 p-0 text-xs text-white/50 shadow-none transition-colors;
   }
 
   .win-btn:hover {
-    @apply bg-brand-700 text-white;
+    @apply bg-app-700 text-white;
   }
 
   .win-btn-close:hover {
@@ -36,7 +36,7 @@
   }
 
   .splash-close {
-    @apply bg-brand-500 absolute top-5 right-5 mx-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/40 p-0 text-xs text-white/50 shadow-none transition-colors;
+    @apply bg-app-500 absolute top-5 right-5 mx-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white/40 p-0 text-xs text-white/50 shadow-none transition-colors;
   }
 
   .splash-close:hover {
@@ -44,7 +44,7 @@
   }
 
   .splash-box {
-    @apply bg-brand-500 relative rounded-4xl px-15 py-15;
+    @apply bg-app-500 relative rounded-4xl px-15 py-15;
   }
 
   /* Panel surfaces */
@@ -77,7 +77,7 @@
   }
 
   .busy-overlay {
-    @apply bg-brand-500/50 pointer-events-none absolute inset-0 z-50 flex flex-col items-center justify-center rounded-xl backdrop-blur-xs transition-opacity duration-300;
+    @apply bg-app-500/50 pointer-events-none absolute inset-0 z-50 flex flex-col items-center justify-center rounded-xl backdrop-blur-xs transition-opacity duration-300;
   }
 
   .busy-overlay-text {
@@ -111,11 +111,11 @@
 
   .tab {
     @apply relative rounded-lg border border-transparent px-4 py-2 text-gray-700 transition-all duration-300 select-none;
-    @apply hover:border-brand-500;
+    @apply hover:border-app-500;
   }
 
   .tab_active {
-    @apply bg-brand-500 rounded-lg border-transparent text-white;
+    @apply bg-app-500 rounded-lg border-transparent text-white;
   }
 
   .btn-toggle {
@@ -131,12 +131,12 @@
   }
 
   .btn-toggle button.active {
-    background-color: var(--color-brand-600);
+    background-color: var(--color-app-600);
     color: var(--color-white);
   }
 
   .btn-toggle button.active:hover {
-    background-color: var(--color-brand-700);
+    background-color: var(--color-app-700);
   }
 
   .drag-region {

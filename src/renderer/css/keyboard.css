@@ -16,7 +16,7 @@
     z-index: 9999;
     width: 300px;
     padding: 0.625rem;
-    @apply bg-sand-50 rounded-xl shadow-xl outline outline-black/10;
+    @apply bg-panel-50 rounded-xl shadow-xl outline outline-black/10;
   }
 
   .numpad-header {
@@ -52,7 +52,7 @@
 
   .numpad-action,
   .qwerty-action {
-    @apply text-brand-600 font-medium;
+    @apply text-app-600 font-medium;
   }
 
   .numpad-zero {
@@ -65,17 +65,17 @@
 
   .numpad-enter,
   .qwerty-enter {
-    @apply bg-brand-500 border-brand-600 text-white;
+    @apply bg-app-500 border-app-600 text-white;
   }
 
   .numpad-enter:hover,
   .qwerty-enter:hover {
-    @apply bg-brand-400;
+    @apply bg-app-400;
   }
 
   .numpad-enter:active,
   .qwerty-enter:active {
-    @apply bg-brand-700;
+    @apply bg-app-700;
   }
 
   .keyboard-buffer-inline {
@@ -94,7 +94,7 @@
     z-index: 9999;
     width: 500px;
     padding: 0.625rem;
-    @apply bg-sand-50 rounded-xl shadow-xl outline outline-black/10;
+    @apply bg-panel-50 rounded-xl shadow-xl outline outline-black/10;
   }
 
   .qwerty-header {
@@ -153,6 +153,6 @@
   }
 
   #qwerty.shifted .qwerty-shift {
-    @apply bg-brand-500 border-brand-600 text-white;
+    @apply bg-app-500 border-app-600 text-white;
   }
 }
