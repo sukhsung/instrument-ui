@@ -1,3 +1,5 @@
+export { load_config } from "./main/ConfigManager.js";
+export { LogManager } from "./main/LogManager.js";
 export { ConnectionManager } from "./main/connection/ConnectionManager.js";
 export { DeviceManager } from "./main/DeviceManager.js";
 export {
