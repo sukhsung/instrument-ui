@@ -1,0 +1,8 @@
+/* Entry point for apps: @import "instrument-ui/renderer/css/index.css"; after @import "tailwindcss". */
+@import "./base.css";
+@import "./components.css";
+@import "./keyboard.css";
+
+/* Paths are relative to this file, so they resolve wherever the package is installed. */
+@source "../templates";
+@source "../js";
