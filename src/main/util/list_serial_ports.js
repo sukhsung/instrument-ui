@@ -1,7 +1,6 @@
-import { getSerialPort } from "./load_serialport.js";
+import { SerialPort } from "serialport";
 
 export async function list_serial_ports() {
-  const SerialPort = getSerialPort();
   const ports = await SerialPort.list();
   const validPorts = ports
     .filter((port) => port.productId !== undefined) // Check if PID exist

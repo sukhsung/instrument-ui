@@ -1,5 +1,5 @@
 import { BaseAdapter } from "./BaseAdapter.js";
-import { getSerialPort } from "../util/load_serialport.js";
+import { SerialPort } from "serialport";
 
 export class SerialAdapter extends BaseAdapter {
   constructor(protocol, verbose = 0) {
@@ -7,7 +7,6 @@ export class SerialAdapter extends BaseAdapter {
   }
 
   async _open() {
-    const SerialPort = getSerialPort();
     this.device = new SerialPort({
       path: this.protocol.address,
       baudRate: this.protocol.baudRate,
