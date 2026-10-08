@@ -1,6 +1,6 @@
 {
   "name": "instrument-ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Suk Hyun Sung",
     "email": "sukhsung@umich.edu"
@@ -23,7 +23,7 @@
     "README.md"
   ],
   "peerDependencies": {
-    "electron": "^42.1.0",
+    "electron": ">=42.1.0",
     "serialport": "^13.0.0"
   }
 }
